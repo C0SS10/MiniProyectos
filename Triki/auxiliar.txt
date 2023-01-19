@@ -1,0 +1,14 @@
+    x_w = 0
+    o_w = 0
+    ties = 0 
+    for _ in range(500):
+        result = t.jugar(imprimir_juego = False)
+        if result == 'X':
+            x_w += 1
+        elif result == 'O':
+            o_w += 1
+        else:
+            ties += 1
+    
+    print(f'Después de 500 partidas, {x_w} : Victorias de computadora random,\
+         {o_w} : Victorias de computadora genio, {ties} empates ')
