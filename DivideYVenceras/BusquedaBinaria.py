@@ -19,7 +19,7 @@ def buscar():
     end = time.time()
     #Tiempo por cada iteración
     print("Tiempo de ejecución busqueda sencilla: ",(end-start)/tamaño,"Segundos")
-    
+
     for objetivo in l_ord:
         busqueda_binaria_ordenada(l_ord,10)
     end = time.time()

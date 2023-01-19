@@ -2,7 +2,8 @@ import Guess as g
 import RockPaperScissors as r
 import Hangman.Hangman as a
 import Triki.juego as t
-import BusquedaBinaria as b
+import DivideYVenceras.BusquedaBinaria as b
+import DivideYVenceras.MergeSort as m
 
 if __name__ == "__main__":
     #g.adivinar(100)
@@ -10,4 +11,5 @@ if __name__ == "__main__":
     #r.jugar()
     #a.ahorcar()
     #t.jugar(imprimir_juego = True)
-    b.buscar()
+    #b.buscar()
+    m.mezclar()
