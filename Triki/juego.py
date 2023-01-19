@@ -84,7 +84,7 @@ class Triki:
 def jugar(imprimir_juego = True):
     juego = Triki()
 
-    jugador_x = JugadorComputadora('X')
+    jugador_x = JugadorHumano('X')
     jugador_o = ComputadoraGenio('O')
 
     if imprimir_juego:
