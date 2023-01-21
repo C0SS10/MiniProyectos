@@ -1,7 +1,7 @@
 import lyricsgenius
 import os
 
-genius = lyricsgenius.Genius("1Ijg3OiScqAB8RS3pC3bdajuYLDo9g3ss5QCYSqHLilNySf4CGMgkHxh5LBfNTU1")
+genius = lyricsgenius.Genius("API Key")
 
 def obtener_barras(temas, artista, album):
     nombre_tema = temas
