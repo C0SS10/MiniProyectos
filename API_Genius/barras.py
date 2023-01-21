@@ -16,11 +16,12 @@ def obtener_barras(temas, artista, album):
         f.writelines(barrotes.split('\\n'))
 
 def escribir():
+    caracteres = '\/:*?|"<>'
     n_tema = input("Escriba el nombre de la canción: ")
     n_artista = input("Escriba el nombre del artista: ")
     n_album = input("Escriba el nombre del album: ")
     x = n_artista.replace(' ','_')
-    y = n_tema.replace(':',' ')
+    y = n_tema.replace(caracteres,' ')
     if os.path.exists(f'API_Genius/canciones/{x}'):
         obtener_barras(y,x,n_album)
     else:
