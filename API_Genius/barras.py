@@ -1,9 +1,9 @@
 import lyricsgenius
 import os
 
-genius = lyricsgenius.Genius("1Ijg3OiScqAB8RS3pC3bdajuYLDo9g3ss5QCYSqHLilNySf4CGMgkHxh5LBfNTU1")
+genius = lyricsgenius.Genius("API Key")
 
-def obtener_barras(temas, artista, album):
+def obtener_barras(temas, artista):
     nombre_tema = temas
     tema = genius.search_song(nombre_tema,artista)
 
@@ -17,13 +17,12 @@ def obtener_barras(temas, artista, album):
 
 def escribir():
     caracteres = '\/:*?|"<>'
-    n_tema = input("Escriba el nombre de la canción: ")
-    n_artista = input("Escriba el nombre del artista: ")
-    n_album = input("Escriba el nombre del album: ")
-    x = n_artista.replace(' ','_')
-    y = n_tema.replace(caracteres,' ')
+    x = input("Escriba el nombre de la canción: ")
+    y = input("Escriba el nombre del artista: ")
+    n_artista = y.replace(' ','_')
+    n_tema = x.replace(caracteres,' ')
     if os.path.exists(f'API_Genius/canciones/{x}'):
-        obtener_barras(y,x,n_album)
+        obtener_barras(n_tema,n_artista)
     else:
         os.makedirs(f'API_Genius/canciones/{x}')
-        obtener_barras(y,x,n_album)
+        obtener_barras(n_tema,n_artista)
