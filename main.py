@@ -4,6 +4,7 @@ import Hangman.Hangman as a
 import Triki.juego as t
 import DivideYVenceras.BusquedaBinaria as b
 import DivideYVenceras.MergeSort as m
+import API_Genius.barras as ge
 
 if __name__ == "__main__":
     #g.adivinar(100)
@@ -12,4 +13,5 @@ if __name__ == "__main__":
     #a.ahorcar()
     #t.jugar(imprimir_juego = True)
     #b.buscar()
-    m.mezclar()
+    #m.mezclar()
+    ge.escribir()

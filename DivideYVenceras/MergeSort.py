@@ -1,5 +1,8 @@
 import random
 
+#   No es necesario ya que python cuenta con sorted() una funcion que ordena listas
+#   Como práctica para crear listas con valores aleatorios (- y +) y posteriormente ordenarlos
+
 def mezclar():
     tamaño = 10
     arr = [0] * tamaño
@@ -33,6 +36,7 @@ def mergesort(l):
                 j += 1
             k += 1
         
+        #Se revisa si todos los valores están bien colocados
         while i < len(bajo):
             l[k] = bajo[i]
             k += 1
@@ -42,4 +46,5 @@ def mergesort(l):
             k += 1
             j += 1
 
+    #Retornamos una lista ordenada
     return l
