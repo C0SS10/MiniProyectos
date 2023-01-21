@@ -25,4 +25,3 @@ def escribir():
         obtener_barras(n_tema,n_artista)
     else:
         os.makedirs(f'API_Genius/canciones/{x}')
-        obtener_barras(n_tema,n_artista)
