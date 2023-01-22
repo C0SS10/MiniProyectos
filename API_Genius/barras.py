@@ -21,7 +21,8 @@ def escribir():
     y = input("Escriba el nombre del artista: ")
     n_artista = y.replace(' ','_')
     n_tema = x.replace(caracteres,' ')
-    if os.path.exists(f'API_Genius/canciones/{x}'):
+    if os.path.exists(f'API_Genius/canciones/{n_artista}'):
         obtener_barras(n_tema,n_artista)
     else:
-        os.makedirs(f'API_Genius/canciones/{x}')
+        os.makedirs(f'API_Genius/canciones/{n_artista}')
+        obtener_barras(n_tema,n_artista)
