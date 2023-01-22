@@ -2,7 +2,7 @@ import random
 import string
 
 def obtener_palabra():
-    nombrearchivo = "file.txt"
+    nombrearchivo = "Hangman/file.txt"
     contenido=[]
     with open(nombrearchivo) as dr:
         palabras = dr.readlines()
@@ -20,6 +20,7 @@ def ahorcar():
     palabra = obtener_palabra()
     letras = set(palabra) #Divide las letras de la palabra
     alfabeto = set(string.ascii_uppercase) #Obtenemos las letras del alfabeto
+    alfabeto.update('Ñ','Á','É','Í','Ó','Ú')
     letras_usadas = set()
     oportunidades = 4
 
