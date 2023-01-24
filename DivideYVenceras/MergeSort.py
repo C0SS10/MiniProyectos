@@ -4,14 +4,14 @@ import random
 #   Como práctica para crear listas con valores aleatorios (- y +) y posteriormente ordenarlos
 
 def mezclar():
-    tamaño = 10
+    tamaño = random.randint(2, 50)
     arr = [0] * tamaño
     for i in range(tamaño):
         arr[i] = (random.randint(-1*100,1*100))
     print(f'La lista inicial es: {arr}', end='\n')
     print()
     l = mergesort(arr)
-    print(f"La lista organizada es: {l}", end="\n")
+    print(f"La lista organizada de tamaño ({tamaño}) es: {l}", end="\n")
 
 def mergesort(l):
     if len(l) > 1:
