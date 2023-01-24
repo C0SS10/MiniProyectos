@@ -1,19 +1,19 @@
 import Guess as g
 import RockPaperScissors as r
-import Hangman.Hangman as a
-import Triki.juego as t
-import DivideYVenceras.BusquedaBinaria as b
-import DivideYVenceras.MergeSort as m
-import API_Genius.Composicion as c
-import Problemas.Family as f
+from Hangman import Hangman
+from Triki import Triki
+from DivideYVenceras import BusquedaBinaria
+from DivideYVenceras import MergeSort
+from API_Genius import Composicion
+from Problemas import Langton,Family
 
 if __name__ == "__main__":
     #g.adivinar(100)
     #g.adivinar_pc(100)
     #r.jugar()
-    #a.ahorcar()
-    #t.jugar(imprimir_juego = True)
-    #b.buscar()
-    #m.mezclar()
-    #print(c.componer('The_Roots'))
-    f.solucion()
+    #Hangman.ahorcar()
+    #Triki.jugar(imprimir_juego = True)
+    #BusquedaBinaria.buscar()
+    #MergeSort.mezclar()
+    #print(Composicion.componer('The_Roots'))
+    Langton.solucion()
