@@ -51,7 +51,7 @@ class Grafo:
         return self.vertices[valor]
 
     def obtener_siguiente_nodo(self,actual_vertice):
-        self.vertices[actual_vertice.valor].siguiente()
+        return self.vertices[actual_vertice.valor].siguiente()
 
     def generar_mapasProbabilidad(self):
         #   para cada vertice se hará un mapa de probabilidad
