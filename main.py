@@ -14,6 +14,6 @@ if __name__ == "__main__":
     #Hangman.ahorcar()
     #Triki.jugar(imprimir_juego = True)
     #BusquedaBinaria.buscar()
-    #MergeSort.mezclar()
+    MergeSort.mezclar()
     #print(Composicion.componer('The_Roots'))
-    Langton.solucion()
+    #Langton.solucion()

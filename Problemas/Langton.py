@@ -38,12 +38,12 @@ def solucion():
                 nro_codificado -= 1
                 #   movemos a la izquierda el bit '1' 3 veces -> 1000, en natural sería 8
                 #   luego conjugamos 8 en binario con el valor de c en este caso 8
-                #   como resultado nos da de nuevo 8, si conjugamos el mismo número en binario:
+                #   como resultado nos da de nuevo 8, si conjugamos el mismo valor de c en binario:
                 if (1 << nro_codificado) & c:
                     #   Si cumple la anterior operación, coloreamos la casilla acutal de color rojo
                     mundo[filas][columnas] = 'R'
                 else:
-                    #   Si no cumple la anterior operación, coloreamos la casilla acutal de color azul
+                    #   Si no cumple la anterior operación, coloreamos la casilla actual de color azul
                     mundo[filas][columnas] = 'B'
         
         #   inicialmente restamos 1 punto a cada coordenada
