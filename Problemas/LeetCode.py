@@ -15,8 +15,22 @@ def maximumWealth(accounts):
         maxDinero = max(dineroActual,maxDinero)
     return maxDinero
 
+def fizzBuzz(n):
+    lista = list()
+    for i in range(1,n+1):
+        if i % 3 == 0 and i % 5 == 0:
+            lista.append('FizzBuzz')
+        elif i % 3 == 0:
+            lista.append('Fizz')
+        elif i % 5 == 0:
+            lista.append('Buzz')
+        else:
+            lista.append(str(i))
+    return lista
+
 if __name__ == '__main__':
-    nums = [1,2,3,4,5]
-    accounts = [[15,20,3],[3,2,8],[10,4,1]]
-    print(runningSum(nums))
-    print(maximumWealth(accounts))
+    #nums = [1,2,3,4,5]
+    #accounts = [[15,20,3],[3,2,8],[10,4,1]]
+    #print(runningSum(nums))
+    #print(maximumWealth(accounts))
+    print(fizzBuzz(5))
