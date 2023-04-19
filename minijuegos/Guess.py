@@ -17,6 +17,7 @@ def adivinar_pc(x):
     inf = 0
     sup = x
     respuesta = ''
+    num_random = 0
 
     while respuesta != 'c':
         if inf != sup:

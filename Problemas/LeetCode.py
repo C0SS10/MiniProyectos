@@ -1,3 +1,6 @@
+from collections import Counter
+import LinkedList
+
 #   Sumar la lista (Running Sum)
 def runningSum(nums):
     #   [0+1, 1+2, 1+2+3, 1+2+3+4, 1+2+3+4+5]
@@ -28,9 +31,16 @@ def fizzBuzz(n):
             lista.append(str(i))
     return lista
 
+def canConstruct(ransomNote, magazine):
+        note, maga = Counter(ransomNote),Counter(magazine)
+        if note & maga == note:
+            return True
+        return False
+
 if __name__ == '__main__':
     #nums = [1,2,3,4,5]
     #accounts = [[15,20,3],[3,2,8],[10,4,1]]
     #print(runningSum(nums))
     #print(maximumWealth(accounts))
-    print(fizzBuzz(5))
+    #print(fizzBuzz(5))
+    print(canConstruct("aa","aab"))
