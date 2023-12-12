@@ -16,24 +16,31 @@ Expected:
 " */
 
 function drawGift(size: number, symbol: string): string {
-  let result = "";
-  let spaces = size;
-  let symbols = 1;
+  const append = (current: string, line: string, spaces: number): string =>
+    `${" ".repeat(spaces)}${line}\n${current}\n${line}`;
 
-  for (let i = 0; i < size; i++) {
-    result += " ".repeat(spaces) + symbol.repeat(symbols) + "\n";
-    spaces--;
-    symbols += 2;
+  const sizeDifference = size - 2;
+
+  const middleSymbolCount = sizeDifference >= 0 ? sizeDifference : 0;
+  let draw: string = `${"#".repeat(size)}${symbol.repeat(middleSymbolCount)}${
+    sizeDifference >= 0 ? "#" : ""
+  }`;
+
+  for (
+    let symbolCount = sizeDifference, spaces = 1;
+    symbolCount > 0;
+    symbolCount--, spaces++
+  ) {
+    const line: string = `#${symbol.repeat(sizeDifference)}#${symbol.repeat(
+      symbolCount - 1
+    )}#`;
+    draw = append(draw, line, spaces);
   }
 
-  spaces = 0;
-  symbols = size * 2 + 1;
-
-  for (let i = 0; i < size; i++) {
-    result += " ".repeat(spaces) + symbol.repeat(symbols) + "\n";
-    spaces++;
-    symbols -= 2;
+  if (size > 1) {
+    const end: string = "#".repeat(size);
+    draw = append(draw, end, size - 1);
   }
 
-  return result;
+  return `${draw}\n`;
 }
