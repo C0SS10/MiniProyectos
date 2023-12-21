@@ -7,12 +7,6 @@ Si no es posible, null.
 Si se puede formar un palíndromo con un cambio, un array con las dos posiciones (índices) que se deben intercambiar para poder crearlo.
 Por ejemplo: */
 
-// getIndexsForPalindrome('anna') // []
-// getIndexsForPalindrome('abab') // [0, 1]
-// getIndexsForPalindrome('abac') // null
-// getIndexsForPalindrome('aaaaaaaa') // []
-// getIndexsForPalindrome('aaababa') // [1, 3]
-// getIndexsForPalindrome('caababa') // null
 // Si se puede formar el palíndromo con diferentes intercambios, siempre se debe devolver el primero que se encuentre.
 
 function getIndexsForPalindrome(word: string): number[] | null {
@@ -53,3 +47,10 @@ function getIndexsForPalindrome(word: string): number[] | null {
   }
   return result;
 }
+
+getIndexsForPalindrome('anna') // []
+getIndexsForPalindrome('abab') // [0, 1]
+getIndexsForPalindrome('abac') // null
+getIndexsForPalindrome('aaaaaaaa') // []
+getIndexsForPalindrome('aaababa') // [1, 3]
+getIndexsForPalindrome('caababa') // null
