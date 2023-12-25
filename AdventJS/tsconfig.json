@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "ES2019",
+    "module": "commonjs",
+    "strict": true
+  },
+  "include": [
+    "AdventJS-2023/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
