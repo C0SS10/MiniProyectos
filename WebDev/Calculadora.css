@@ -1,0 +1,93 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  color-scheme: light dark;
+}
+
+abbr[title] {
+  border-bottom: none;
+  text-decoration: none;
+  text-decoration: none;
+}
+
+body {
+  height: 100vh;
+  background-image: linear-gradient(
+    135deg,
+    #f2e8cf 0%,
+    #a7c957 25%,
+    #386641 75%
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calculadora {
+  background-color: light-dark(#fff9f3, #2f2f2f);
+  color: light-dark(#2f2f2f, #fff9f3);
+  border-radius: 10px;
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.146);
+  padding: 1rem;
+}
+
+.resultado {
+  font-family: "Trebuchet MS";
+  font-size: 2rem;
+  padding: 1rem;
+  text-align: right;
+  border: 1px solid light-dark(#386641, #a7c957);
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+#operacion {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  font-size: 1rem;
+  color: #888;
+}
+
+.botones {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+}
+
+.boton {
+  background-color: light-dark(#fff9f3, #2f2f2f);
+  font-family: "Trebuchet MS";
+  font-size: 2rem;
+  padding: 1rem;
+  cursor: pointer;
+  border: 1px solid light-dark(#386641, #a7c957);
+  border-radius: 0.5rem;
+  font-weight: 600;
+}
+
+.suma {
+  grid-row: span 2;
+  grid-column: 4;
+}
+
+.resultado {
+  grid-column: 4;
+  grid-row: span 5;
+}
+
+.cero {
+  grid-column: span 2;
+}
+
+.boton:hover {
+  background-color: light-dark(#efefef, #444444);
+  transition: color 0.5s;
+}
