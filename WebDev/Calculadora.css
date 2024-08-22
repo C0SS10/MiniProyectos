@@ -37,7 +37,7 @@ body {
   padding: 1rem;
 }
 
-.resultado {
+.contenedor-operacion {
   font-family: "Trebuchet MS";
   font-size: 1.8rem;
   padding: 1rem;
@@ -56,6 +56,13 @@ body {
   color: #888;
 }
 
+#resultado {
+  position: relative;
+  top: 0.4rem;
+  font-size: 2rem;
+  text-align: right;
+}
+
 .botones {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -66,7 +73,7 @@ body {
   background-color: light-dark(#fff9f3, #2f2f2f);
   font-family: "Trebuchet MS";
   font-size: 2.5rem;
-  padding: 1rem;
+  padding: 1.2rem;
   cursor: pointer;
   border: 1px solid light-dark(#386641, #a7c957);
   border-radius: 0.5rem;
@@ -80,7 +87,7 @@ body {
 
 .resultado {
   grid-column: 4;
-  grid-row: span 5;
+  grid-row: span 2;
 }
 
 .cero {
