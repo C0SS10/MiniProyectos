@@ -1,98 +1,98 @@
 "use strict";
+
 // Seleccionar los elementos HTML
-const resultado = document.getElementById("resultado");
+const resultadoElement = document.getElementById("resultado");
+const operacionElement = document.getElementById("operacion");
 const botones = document.querySelectorAll(".boton");
-const operacionSpan = document.getElementById("operacion");
 
 // Variables para guardar los estados
 let valorActual = "";
 let valorAnterior = "";
 let operador = null;
+let resultadoMostrado = false;  // Nueva variable para rastrear si se mostró un resultado
 
 // Asignar el evento click a cada botón
 botones.forEach((boton) => {
-    boton.addEventListener("click", () => {
-        const valor = boton.getAttribute("data-value");
-        manejarClickBoton(valor);
-    });
+    boton.addEventListener("click", () => manejarClickBoton(boton.getAttribute("data-value")));
 });
 
-// Función para actualizar el resultado
-const actualizarResultado = (valor) => {
-    resultado.innerHTML = `<span id="operacion">${operacionSpan.innerHTML}</span> ${valor}`;
-};
-
-// Función para actualizar el span de operación
-const actualizarSpanOperacion = () => {
+// Función para actualizar el resultado y la operación en pantalla
+const actualizarPantalla = () => {
     if (operador) {
-        operacionSpan.innerHTML = `${valorAnterior} ${operador} ${valorActual}`;
+        operacionElement.textContent = `${valorAnterior} ${operador} ${valorActual}`;
     } else {
-        operacionSpan.innerHTML = `${valorActual}`;
+        operacionElement.textContent = valorActual || "0";
     }
+    resultadoElement.textContent = valorActual || valorAnterior || "0";
 };
 
 // Función para manejar la evaluación de la operación
 const calcularResultado = () => {
-    let resultadoOperacion;
     try {
+        // Verificar si se está realizando una división por cero
         if (operador === "/" && valorActual === "0") {
-            throw "División por cero";
+            throw new Error("División por cero");
         }
-        resultadoOperacion = eval(`${valorAnterior}${operador}${valorActual}`);
+        return eval(`${valorAnterior}${operador}${valorActual}`);
     } catch (error) {
-        resultadoOperacion = "Error";
+        return "Error"; // Si ocurre un error, retornar "Error"
     }
-    return resultadoOperacion;
 };
 
 // Función para manejar el clic en un botón
 const manejarClickBoton = (valor) => {
+    // Si el valor actual es "Error", no permitir ninguna operación excepto "C"
+    if (valorActual === "Error") {
+        if (valor !== "C") {
+            return;
+        }
+    }
+
     // Si es un número o un punto decimal
     if (!isNaN(Number(valor)) || valor === ".") {
-        // Evitar ceros a la izquierda
-        if (valorActual === "0" && valor !== ".") {
-            // Reemplaza "0" por el valor ingresado
-            valorActual = valor;
+        if (resultadoMostrado) {
+            // Si se muestra un resultado, al presionar un número se reinicia la calculadora
+            valorActual = valor === "." ? "0." : valor;
+            resultadoMostrado = false;
         } else {
-            valorActual += valor;
+            if (valorActual === "0" && valor !== ".") {
+                valorActual = valor; // Reemplaza "0" por el valor ingresado
+            } else {
+                valorActual += valor;
+            }
         }
-        actualizarSpanOperacion();
-        actualizarResultado(valorActual);
     }
     // Si se quiere limpiar la calculadora
     else if (valor === "C") {
         valorActual = "";
         valorAnterior = "";
         operador = null;
-        actualizarSpanOperacion();
-        actualizarResultado("0");
+        resultadoMostrado = false;
     }
     // Si se presiona un operador (+, -, *, /)
     else if (["+", "-", "*", "/"].includes(valor)) {
-        if (valorActual === "")
-            return;
-        // Si hay un operador y un valor anterior, realizar la operación actual
-        if (operador && valorAnterior) {
-            const resultadoOperacion = calcularResultado();
-            valorAnterior = resultadoOperacion.toString();
-            actualizarResultado(resultadoOperacion.toString());
-            operacionSpan.innerHTML = `${valorAnterior}${operador}`;
-        } else {
-            valorAnterior = valorActual;
+        if (valorActual && valorActual) {
+            if (valorAnterior === "Error") {
+                valorAnterior = valorActual;
+            } else if (valorAnterior && operador) {
+                valorAnterior = calcularResultado().toString();
+                console.log(`Valor anterior: ${valorAnterior}, ${operador}, ${valorActual}`);
+            } else {
+                valorAnterior = valorActual;
+            }
+            valorActual = "";
+            operador = valor;
+            resultadoMostrado = false;
         }
-        valorActual = "";
-        operador = valor;
-        actualizarSpanOperacion();
     }
     // Si se presiona el botón de igual
-    else if (valor === "=") {
-        if (valorAnterior && operador && valorActual) {
-            const resultadoOperacion = calcularResultado();
-            valorAnterior = resultadoOperacion.toString();
-            valorActual = "";
-            operador = null;
-            operacionSpan.innerHTML = `${valorAnterior}`; // Mostrar el resultado en el span de operación
-            actualizarResultado(valorAnterior);
-        }
+    else if (valor === "=" && valorAnterior && operador && valorActual) {
+        const resultadoFinal = calcularResultado().toString();
+        operacionElement.textContent = `${valorAnterior} ${operador} ${valorActual} =`;
+        valorActual = resultadoFinal;
+        valorAnterior = "";
+        operador = null;
+        resultadoMostrado = true;  // Indica que se mostró un resultado
     }
+    actualizarPantalla();
 };
