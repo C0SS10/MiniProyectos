@@ -72,7 +72,7 @@ body {
 .boton {
   background-color: light-dark(#fff9f3, #2f2f2f);
   font-family: "Trebuchet MS";
-  font-size: 2.5rem;
+  font-size: 2rem;
   padding: 1.2rem;
   cursor: pointer;
   border: 1px solid light-dark(#386641, #a7c957);
@@ -97,4 +97,10 @@ body {
 .boton:hover {
   background-color: light-dark(#efefef, #444444);
   transition: color 0.5s;
+}
+
+.boton[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  border: 1px dashed light-dark(#386641, #a7c957);
 }
