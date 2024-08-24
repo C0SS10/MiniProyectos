@@ -61,7 +61,7 @@ const calcularResultado = () => {
 // Función para manejar el clic en un botón
 const manejarClickBoton = (valor) => {
     // Si el valor actual es algún "Error", no permitir ninguna operación excepto "C"
-    if (resultadoElement.innerText === "Error" || resultadoElement.innerText === "División por cero") {
+    if (resultadoElement.innerText === "Error" || resultadoElement.innerText === "División por cero" || resultadoElement.innerText === "Raíz negativa") {
         if (valor !== "C") {
             return; // No hacer nada si no se presiona "C"
         } else {
@@ -96,7 +96,15 @@ const manejarClickBoton = (valor) => {
     // Función de raíz cuadrada (√)
     else if (valor === "√") {
         if (valorActual) {
-            valorActual = Math.sqrt(parseFloat(valorActual)).toString();
+            const number = parseFloat(valorActual);
+            if (number < 0) {
+                valorActual = "Raíz negativa";
+                botones.forEach((boton) => {
+                    boton.disabled = boton.dataset.value !== 'C';
+                });
+            } else {
+                valorActual = Math.sqrt(number).toString();
+            }
             resultadoMostrado = true;
         }
     }
@@ -140,7 +148,6 @@ const manejarClickBoton = (valor) => {
     // Si se presiona el botón de igual
     else if (valor === "=" && valorAnterior && operador && valorActual) {
         const resultadoFinal = calcularResultado().toString();
-        operacionElement.textContent = `${valorAnterior} ${operador} ${valorActual} =`;
         valorActual = resultadoFinal;
         valorAnterior = "";
         operador = null;
