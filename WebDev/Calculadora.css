@@ -78,6 +78,7 @@ body {
   border: 1px solid light-dark(#386641, #a7c957);
   border-radius: 0.5rem;
   font-weight: 600;
+  transition: opacity 0.3s ease-in, border 0.3s ease-in;
 }
 
 .suma {
@@ -103,4 +104,33 @@ body {
   opacity: 0.5;
   cursor: not-allowed;
   border: 1px dashed light-dark(#386641, #a7c957);
+  transition: opacity 0.5s, border 0.5s;
+}
+
+/* Estilos para dispositivos largos */
+@media (min-height: 800px) {
+  .calculadora {
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+  }
+}
+
+/* Estilos para tablets */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .calculadora {
+    max-width: 500px;
+  }
+
+  .botones .boton {
+    font-size: 4rem;
+    padding: 2rem;
+  }
+
+  #resultado {
+    font-size: 3rem;
+  }
+
+  #operacion {
+    font-size: 1.5rem;
+  }
 }
