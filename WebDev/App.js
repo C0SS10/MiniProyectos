@@ -9,7 +9,7 @@ const botones = document.querySelectorAll(".boton");
 let valorActual = "";
 let valorAnterior = "";
 let operador = null;
-let resultadoMostrado = false;  // Nueva variable para rastrear si se mostró un resultado
+let resultadoMostrado = false;
 
 // Asignar el evento click a cada botón
 botones.forEach((boton) => {
@@ -29,37 +29,90 @@ const actualizarPantalla = () => {
 // Función para manejar la evaluación de la operación
 const calcularResultado = () => {
     try {
-        // Verificar si se está realizando una división por cero
-        if (operador === "/" && valorActual === "0") {
-            throw new Error("División por cero");
+        let expresion = `${valorAnterior || 0}${operador}${valorActual || 0}`;
+        expresion = expresion.replace(/--/g, '+');
+
+        // Evaluar la expresión
+        const resultado = eval(expresion);
+
+        // Manejar el caso de la división por cero
+        if (resultado === Infinity || resultado === -Infinity) {
+            // Deshabilitar todos los botones excepto "C"
+            botones.forEach((boton) => {
+                boton.disabled = boton.dataset.value !== 'C';
+            });
+            return "División por cero";
+        } else {
+            // Habilitar todos los botones
+            botones.forEach((boton) => {
+                boton.disabled = false;
+            });
+            return resultado;
         }
-        return eval(`${valorAnterior}${operador}${valorActual}`);
     } catch (error) {
-        return "Error"; // Si ocurre un error, retornar "Error"
+        // Deshabilitar todos los botones excepto "C"
+        botones.forEach((boton) => {
+            boton.disabled = boton.dataset.value !== 'C';
+        });
+        return "Error";
     }
 };
 
 // Función para manejar el clic en un botón
 const manejarClickBoton = (valor) => {
-    // Si el valor actual es "Error", no permitir ninguna operación excepto "C"
-    if (valorActual === "Error") {
+    // Si el valor actual es algún "Error", no permitir ninguna operación excepto "C"
+    if (resultadoElement.innerText === "Error" || resultadoElement.innerText === "División por cero") {
         if (valor !== "C") {
-            return;
+            return; // No hacer nada si no se presiona "C"
+        } else {
+            // Si se presiona "C", desbloquear todos los botones
+            botones.forEach((boton) => {
+                boton.disabled = false;
+            });
         }
     }
 
     // Si es un número o un punto decimal
     if (!isNaN(Number(valor)) || valor === ".") {
         if (resultadoMostrado) {
-            // Si se muestra un resultado, al presionar un número se reinicia la calculadora
             valorActual = valor === "." ? "0." : valor;
             resultadoMostrado = false;
         } else {
             if (valorActual === "0" && valor !== ".") {
-                valorActual = valor; // Reemplaza "0" por el valor ingresado
+                valorActual = valor;
             } else {
                 valorActual += valor;
             }
+        }
+    }
+
+    // Función de potenciación (x²)
+    else if (valor === "^") {
+        if (valorActual) {
+            valorActual = Math.pow(parseFloat(valorActual), 2).toString();
+            resultadoMostrado = true;
+        }
+    }
+    // Función de raíz cuadrada (√)
+    else if (valor === "√") {
+        if (valorActual) {
+            valorActual = Math.sqrt(parseFloat(valorActual)).toString();
+            resultadoMostrado = true;
+        }
+    }
+    // Función de porcentaje (%)
+    else if (valor === "%") {
+        if (valorActual) {
+            valorActual = (parseFloat(valorActual) / 100).toString();
+            resultadoMostrado = true;
+        }
+    }
+    // Cambiar signo del número (±)
+    else if (valor === "±") {
+        if (valorActual) {
+            valorActual = (parseFloat(valorActual) * -1).toString();
+        } else if (operador) {
+            valorAnterior = (parseFloat(valorAnterior) * -1).toString();
         }
     }
     // Si se quiere limpiar la calculadora
@@ -71,12 +124,11 @@ const manejarClickBoton = (valor) => {
     }
     // Si se presiona un operador (+, -, *, /)
     else if (["+", "-", "*", "/"].includes(valor)) {
-        if (valorActual && valorActual) {
+        if (valorActual) {
             if (valorAnterior === "Error") {
                 valorAnterior = valorActual;
             } else if (valorAnterior && operador) {
                 valorAnterior = calcularResultado().toString();
-                console.log(`Valor anterior: ${valorAnterior}, ${operador}, ${valorActual}`);
             } else {
                 valorAnterior = valorActual;
             }
@@ -92,7 +144,7 @@ const manejarClickBoton = (valor) => {
         valorActual = resultadoFinal;
         valorAnterior = "";
         operador = null;
-        resultadoMostrado = true;  // Indica que se mostró un resultado
+        resultadoMostrado = true;
     }
     actualizarPantalla();
 };
